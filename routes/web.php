@@ -29,7 +29,7 @@ Route::get('products/create','ProductController@create' )->name('products.create
 Route::post('products','ProductController@store' )->name('products.store');
 
 
-//rutan que recibe un parametro muestra el id y lo muestra
+//ruta que recibe un parametro muestra el id y lo muestra
 Route::get('products/{product}', 'ProductController@show')->name('products.show');
 
 
@@ -44,6 +44,10 @@ Route::match(['put','patch'], 'products/{product}','ProductController@update')->
 //ruta que recibe un parametro y elimina un producto
 Route::delete('products/{product}','ProductController@destroy')->name('products.destroy');
 
+//retornador welcome desde el main controller
+Route::get('main','MainController@index')->name('main.index');
+
+//Route::get('main/list','MainController@list')->name('main.list');
 
 // php artisan route:list
 
