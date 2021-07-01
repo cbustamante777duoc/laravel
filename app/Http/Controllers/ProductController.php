@@ -21,12 +21,23 @@ class ProductController extends Controller
 
     public function create()
     {
-        return 'this  is the form create a product';
+        return view('products.create');
+        
     }
 
+    //metodo que recibe las fillable
     public function store()
     {
-      return 'test message';   
+        /*$product = Product::create([
+            'title' => request()->title,
+            'description' => request()->description,
+            'price' =>  request()->price,
+            'stock' => request()->stock,
+            'status' => request()->status,
+        ]);*/
+       
+       $product = Product::create(request()->all());
+       return $product;
     }    
 
     public function show($product)
@@ -41,16 +52,22 @@ class ProductController extends Controller
         ]);
     }
 
+    //metodo que retorna una instacia del producto enviado en el id
     public function edit($product)
     {
-
-        return "showing form to edit the product with id {$product}";
+        
+        return view('products.edit')->with([
+            'product' => Product::findOrFail($product),
+        ]);
     }
 
     public function update($product)
     {
 
-       return "message test";
+       $product = Product::findOrFail($product);
+       $product -> update(request()->all());
+
+       return $product;
     }
 
 

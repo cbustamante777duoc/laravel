@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-</head>
-<body>
-	<h1>List of products</h1>
+@extends('layouts.master')
+
+@section('content')
+<h1>List of products</h1>
 
 	@empty ($products)	   
 		<div class="alert alert-warning">
@@ -44,6 +39,6 @@
 		</div>
 
 	@endempty
+@endsection
 
-</body>
-</html>
+	
