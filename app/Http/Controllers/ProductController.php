@@ -12,8 +12,7 @@ class ProductController extends Controller
     {   
         //$products = 
         //$products = DB::table('products')->get();
-        //dd($products);
-
+      
         return View('products.index')->with([
             'products' => Product::all(),
         ]);
@@ -40,13 +39,12 @@ class ProductController extends Controller
        return $product;
     }    
 
+    //recibe un id y muestra un producto
     public function show($product)
     {
-        $product = Product::findOrFail($product);
         //$product = DB::table('products')->where('id',$product)->first();
        // $product = DB::table('products')->find($product);
-        //dd($product);
-        //return $product;
+         $product = Product::findOrFail($product);
         return View('products.show')->with([
             'product' => $product,
         ]);
@@ -55,7 +53,6 @@ class ProductController extends Controller
     //metodo que retorna una instacia del producto enviado en el id
     public function edit($product)
     {
-        
         return view('products.edit')->with([
             'product' => Product::findOrFail($product),
         ]);
@@ -63,7 +60,6 @@ class ProductController extends Controller
 
     public function update($product)
     {
-
        $product = Product::findOrFail($product);
        $product -> update(request()->all());
 
@@ -74,7 +70,10 @@ class ProductController extends Controller
     public function destroy($product)
     {
      
-        return "message test"; 
+        $product = Product::findOrFail($product);
+        $product -> delete();
+
+        return $product;
     }
 
    
