@@ -18,25 +18,38 @@ class ProductController extends Controller
         ]);
     }
 
+    //retorna una vista de formulario
     public function create()
     {
         return view('products.create');
         
     }
 
-    //metodo que recibe las fillable
+    //recibe los datos del formulario create y los guarda en db 
     public function store()
     {
-        /*$product = Product::create([
-            'title' => request()->title,
-            'description' => request()->description,
-            'price' =>  request()->price,
-            'stock' => request()->stock,
-            'status' => request()->status,
-        ]);*/
-       
+        $rules = [
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:1000'],
+            'price' => ['required', 'min:1'],
+            'stock' => ['required', 'min:0'],
+            'status' => ['required', 'in:available,unavailable'],
+        ];
+
+        request()->validate($rules);
+
+        //pregunta si el el producto esta disponible pero tiene stock o 
+      
+      if (request()->status=='available' && request()->stock == 0) {
+          //session()->put('error','if available must have stock');
+            session()->flash('error','if available must have stock');
+
+          return redirect()->back();
+      }
+
+       //metodo request()all() = todas las filas del model
        $product = Product::create(request()->all());
-       return $product;
+       return redirect()->route('products.index');
     }    
 
     //recibe un id y muestra un producto
@@ -60,10 +73,21 @@ class ProductController extends Controller
 
     public function update($product)
     {
+
+        $rules = [
+            'title' => ['required', 'max:255'],
+            'description' => ['required', 'max:1000'],
+            'price' => ['required', 'min:1'],
+            'stock' => ['required', 'min:0'],
+            'status' => ['required', 'in:available,unavailable'],
+        ];
+
+        request()->validate($rules);
+
        $product = Product::findOrFail($product);
        $product -> update(request()->all());
 
-       return $product;
+       return redirect()->route('products.index');
     }
 
 
@@ -73,7 +97,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($product);
         $product -> delete();
 
-        return $product;
+        return redirect()->route('products.index');
     }
 
    
