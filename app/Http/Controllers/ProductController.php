@@ -10,13 +10,11 @@ class ProductController extends Controller
 {
     public function index()
     {   
-        //$products = 
-        //$products = DB::table('products')->get();
-      
         return View('products.index')->with([
             'products' => Product::all(),
         ]);
     }
+    
 
     //retorna una vista de formulario
     public function create()
@@ -24,6 +22,7 @@ class ProductController extends Controller
         return view('products.create');
         
     }
+
 
     //recibe los datos del formulario create y los guarda en db 
     public function store()
@@ -36,6 +35,7 @@ class ProductController extends Controller
             'status' => ['required', 'in:available,unavailable'],
         ];
 
+        //se agregan las validaciones
         request()->validate($rules);
 
         //pregunta si el el producto esta disponible pero tiene stock o 
@@ -44,7 +44,9 @@ class ProductController extends Controller
           //session()->put('error','if available must have stock');
             session()->flash('error','if available must have stock');
 
-          return redirect()->back();
+         //envio con todos los valores que se enviaron
+          return redirect()->
+                    back()->withInput(request()->all());
       }
 
        //metodo request()all() = todas las filas del model
@@ -52,12 +54,10 @@ class ProductController extends Controller
        return redirect()->route('products.index');
     }    
 
-    //recibe un id y muestra un producto
+    //recibe un producto id y muestra todos los valores
     public function show($product)
     {
-        //$product = DB::table('products')->where('id',$product)->first();
-       // $product = DB::table('products')->find($product);
-         $product = Product::findOrFail($product);
+        $product = Product::findOrFail($product);
         return View('products.show')->with([
             'product' => $product,
         ]);

@@ -6,12 +6,25 @@
 	<title>app laravel</title>
 </head>
 <body>
-     @dump($errors)
+     <!--error de la sesion-->
 	 @if(session()->has('error'))
 		 <div class="alert alert-danger">
 		 	{{session()->get('error')}}
 		 </div>
 	 	
+	 @endif
+	 <!--si encuentra un error-->
+	 @if(isset($errors) && $errors->any())
+	 	<div class="alert alert-danger">
+	 		 <!--recorre todos los errores y los muestra en un mensaje-->
+	 		<ul>
+	 			@foreach($errors->all() as $error)
+	 				<li>{{$error}}</li>
+	 			@endforeach
+
+	 		</ul>
+
+	 	</div>
 	 @endif
 
 	@yield('content')
