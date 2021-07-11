@@ -6,13 +6,7 @@
 	<title>app laravel</title>
 </head>
 <body>
-     <!--error de la sesion-->
-	 @if(session()->has('error'))
-		 <div class="alert alert-danger">
-		 	{{session()->get('error')}}
-		 </div>
-	 	
-	 @endif
+     
 
 	     <!--mensaje de existo-->
      @if(session()->has('success'))

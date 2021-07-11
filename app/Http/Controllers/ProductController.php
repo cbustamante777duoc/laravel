@@ -23,6 +23,7 @@ class ProductController extends Controller
         
     }
 
+    
 
     //recibe los datos del formulario create y los guarda en db 
     public function store()
@@ -42,20 +43,25 @@ class ProductController extends Controller
       
       if (request()->status=='available' && request()->stock == 0) {
           //mensaje de si hay error
-            session()->flash('error','if available must have stock');
+        // session()->flash('error','if available must have stock');
 
          //envio con todos los valores que se enviaron
-          return redirect()->
-                    back()->withInput(request()->all());
+          return redirect()
+                    ->back()
+                    ->withInput(request()->all())
+                    ->withErrors('if available must have stock');
+
       }
 
        //metodo request()all() = todas las filas del model
        $product = Product::create(request()->all());
        //mensaje de exito
-       session()->flash('success',"the new product with id {$product->id} was created");
+       
+       return redirect()
+            ->route('products.index')
+            ->withSuccess("the new product with id {$product->id} was created");
+    }       
 
-       return redirect()->route('products.index');
-    }    
 
 
     //recibe un producto id y muestra todos los valores
@@ -91,7 +97,9 @@ class ProductController extends Controller
        $product = Product::findOrFail($product);
        $product -> update(request()->all());
 
-       return redirect()->route('products.index');
+       return redirect()
+         ->route('products.index')
+         ->withSuccess("the product with id {$product->id} was updated");
     }
 
 
@@ -101,7 +109,9 @@ class ProductController extends Controller
         $product = Product::findOrFail($product);
         $product -> delete();
 
-        return redirect()->route('products.index');
+        return redirect()
+            ->route('products.index')
+            ->withSuccess("the  product with id {$product->id} was deleted");
     }
 
    
