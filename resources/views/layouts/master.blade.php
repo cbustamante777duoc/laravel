@@ -13,6 +13,14 @@
 		 </div>
 	 	
 	 @endif
+
+	     <!--mensaje de existo-->
+     @if(session()->has('success'))
+		 <div class="alert alert-success">
+		 	{{session()->get('success')}}
+		 </div>
+	 @endif
+
 	 <!--si encuentra un error-->
 	 @if(isset($errors) && $errors->any())
 	 	<div class="alert alert-danger">
