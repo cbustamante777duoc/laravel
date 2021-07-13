@@ -42,7 +42,7 @@ class ProductController extends Controller
         //pregunta si el el producto esta disponible pero tiene stock o 
       
       if (request()->status=='available' && request()->stock == 0) {
-          //mensaje de si hay error
+        
         // session()->flash('error','if available must have stock');
 
          //envio con todos los valores que se enviaron
@@ -55,7 +55,7 @@ class ProductController extends Controller
 
        //metodo request()all() = todas las filas del model
        $product = Product::create(request()->all());
-       //mensaje de exito
+       
        
        return redirect()
             ->route('products.index')

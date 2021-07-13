@@ -51,3 +51,7 @@ Route::get('main','MainController@index')->name('main.index');
 
 // php artisan route:list
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
