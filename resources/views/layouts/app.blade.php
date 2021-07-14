@@ -76,29 +76,32 @@
         </nav>
 
         <main class="py-4">
+            <div class="container-fluid">
+
             
-                <!--mensaje de exito-->
-        @if(session()->has('success'))
-            <div class="alert alert-success">
-                {{session()->get('success')}}
-            </div>
-        @endif
+                        <!--mensaje de exito-->
+                        @if(session()->has('success'))
+                            <div class="alert alert-success">
+                                        {{session()->get('success')}}
+                                    </div>
+                        @endif
 
-        <!--si encuentra un error-->
-        @if(isset($errors) && $errors->any())
-            <div class="alert alert-danger">
-                <!--recorre todos los errores y los muestra en un mensaje-->
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                    @endforeach
+                        <!--si encuentra un error-->
+                        @if(isset($errors) && $errors->any())
+                            <div class="alert alert-danger">
+                                <!--recorre todos los errores y los muestra en un mensaje-->
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
 
-                </ul>
+                                </ul>
 
-            </div>
-        @endif
+                            </div>
+                        @endif
 
-            @yield('content')
+                        @yield('content')
+           </div>
         </main>
     </div>
 </body>
