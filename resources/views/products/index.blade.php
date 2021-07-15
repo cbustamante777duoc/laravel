@@ -34,6 +34,9 @@
 							<td>{{$product->stock}}</td>	
 							<td>{{$product->status}}</td>
 							<td>
+
+								{{-- <a class="btn btn-link d-inline"  href="{{route('products.show',['product'=> $product->title])}}">Show</a> --}}
+
 								<a class="btn btn-link d-inline"  href="{{route('products.show',['product'=> $product->id])}}">Show</a>
 
 								<a class="btn btn-link " href="{{route('products.edit',['product'=> $product->id])}}">Edit</a>

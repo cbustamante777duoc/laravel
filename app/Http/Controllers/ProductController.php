@@ -72,23 +72,24 @@ class ProductController extends Controller
 
 
     //recibe un producto id y muestra todos los valores
-    public function show($product)
+    public function show(Product $product)
     {
-        $product = Product::findOrFail($product);
+        //$product = Product::findOrFail($product);
         return View('products.show')->with([
             'product' => $product,
         ]);
     }
 
     //metodo que retorna una instacia del producto enviado en el id
-    public function edit($product)
+    public function edit(Product $product)
     {
         return view('products.edit')->with([
-            'product' => Product::findOrFail($product),
+           // 'product' => Product::findOrFail($product),
+           'product' => $product
         ]);
     }
 
-    public function update($product)
+    public function update(Product $product)
     {
 
         $rules = [
@@ -101,7 +102,7 @@ class ProductController extends Controller
 
         request()->validate($rules);
 
-       $product = Product::findOrFail($product);
+       //$product = Product::findOrFail($product);
        $product -> update(request()->all());
 
        return redirect()
@@ -110,10 +111,10 @@ class ProductController extends Controller
     }
 
 
-    public function destroy($product)
+    public function destroy(Product $product)
     {
      
-        $product = Product::findOrFail($product);
+        //$product = Product::findOrFail($product);
         $product -> delete();
 
         return redirect()
