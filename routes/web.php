@@ -22,6 +22,10 @@ Route::get('/', function () {
 Route::get('products','ProductController@index')->name('products.index');
 
 
+Route::resource('products', 'ProductController');
+
+/*
+
 //ruta que retorna un un formulario
 Route::get('products/create','ProductController@create' )->name('products.create');
 
@@ -51,7 +55,10 @@ Route::get('main','MainController@index')->name('main.index');
 
 //Route::get('main/list','MainController@list')->name('main.list');
 
+*/
+
 // php artisan route:list
+
 
 
 Auth::routes();
