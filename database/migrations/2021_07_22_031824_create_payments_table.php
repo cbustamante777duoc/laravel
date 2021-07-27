@@ -15,6 +15,9 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            //amount tiene que ser un precio positivo
+            $table->float('amount')->unsigned();
+            $table->timestamp('payed_at')->nullable();
             $table->timestamps();
         });
     }
