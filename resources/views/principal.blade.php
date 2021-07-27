@@ -4,7 +4,7 @@
     <h1>Welcome</h1>
     @empty ($products)
         <div class="alert alert-danger">
-            No products yet!
+           pagina principal
         </div>
     @else
         <div class="row">
