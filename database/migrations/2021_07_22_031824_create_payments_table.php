@@ -18,7 +18,10 @@ class CreatePaymentsTable extends Migration
             //amount tiene que ser un precio positivo
             $table->float('amount')->unsigned();
             $table->timestamp('payed_at')->nullable();
+            $table->bigInteger('order_id')->unsigned();
             $table->timestamps();
+            //estableciones conexiones con la tabla orders
+            $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 
