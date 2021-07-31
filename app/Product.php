@@ -24,12 +24,14 @@ class Product extends Model
         'status'
     ];
 
+    //metodo para acceder carro de compras
     public function carts()
     {
         return $this->belongsToMany(Cart::class)->withPivot('quantity');
 
     }
 
+    //metodo para acceder a ordenes
     public function orders()
     {
         return $this->belongsToMany(Order::class)->withPivot('quantity');

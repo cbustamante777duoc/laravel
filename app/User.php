@@ -56,11 +56,13 @@ class User extends Authenticatable
         'admin_since',
     ];
 
+    //metodo para acceder a las ordenes
     public function orders()
     {
         return $this->hasMany(Order::class,'customer_id');
     }
 
+    //metodo para acceder a un pago
     public function payments()
     {
         return $this->hasManyThrough(Payment::class, Order::class, 'customer_id');

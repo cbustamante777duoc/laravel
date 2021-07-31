@@ -32,6 +32,7 @@ class Payment extends Model
         'payed_at',
     ];
 
+    //metodo para acceder a las ordenes
     public function order()
     {
         return $this->belongsTo(Order::class);

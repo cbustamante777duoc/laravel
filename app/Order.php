@@ -21,18 +21,21 @@ class Order extends Model
         'customer_id',
     ];
 
+    //metodo para acceder a los pagos
     public function payment()
     {
 
         return $this->hasOne(Payment::class);
     }
 
+    //metodo para acceder a los usuarios
     public function user()
     {
         //referenciando el customer_id es la id del usuario
         return $this->belongsTo(User::class, 'customer_id');
     }
 
+    //metodo para acceder a los productos
     public function products()
     {
         return $this->belongsToMany(Product::class)->withPivot('quantity');
