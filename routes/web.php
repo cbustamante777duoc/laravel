@@ -15,14 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'MainController@index')->name('main');
 
-
-
-
-Route::get('/principal', function () {
-    return view('principal');
-})->name('principal');
-
-
 //ruta que retorna un lista
 Route::get('products','ProductController@index')->name('products.index');
 
