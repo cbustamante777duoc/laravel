@@ -18,4 +18,10 @@ class Image extends Model
         'path',
         
     ];
+
+    //metodo para acceder a los usuario o los productos
+    public function imageable()
+    {
+        return $this->morphTo();
+    }
 }
