@@ -38,7 +38,7 @@ class Order extends Model
     //metodo para acceder a los productos
     public function products()
     {
-        return $this->belongsToMany(Product::class)->withPivot('quantity');
+        return $this->morphToMany(Product::class,'productable')->withPivot('quantity');
 
     }
 }
