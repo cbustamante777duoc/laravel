@@ -25,14 +25,14 @@ class Product extends Model
         'status'
     ];
 
-    //metodo para acceder carro de compras
+    //metodo para acceder carro de compras relaciones polimorficas
     public function carts()
     {
         return $this->morphedByMany(Cart::class,'productable')->withPivot('quantity');
 
     }
 
-    //metodo para acceder a ordenes
+    //metodo para acceder a ordenes  relaciones polimorficas
     public function orders()
     {
         return $this->morphedByMany(Order::class,'productable')->withPivot('quantity');

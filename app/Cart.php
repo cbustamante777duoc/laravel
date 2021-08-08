@@ -9,7 +9,7 @@ class Cart extends Model
 {
     use HasFactory;
 
-    //metodo para acceder a los productos
+    //metodo para acceder a los productos  relaciones polimorficas
     public function products()
     {
         return $this->morphToMany(Product::class,'productable')->withPivot('quantity');

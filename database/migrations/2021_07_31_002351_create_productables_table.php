@@ -16,6 +16,7 @@ class CreateProductablesTable extends Migration
         Schema::create('productables', function (Blueprint $table) {
             $table->bigInteger('product_id')->unsigned();
             $table->integer('quantity')->unsigned();
+            //haciendo referencia a poliformismo
             $table->morphs('productable');
             $table->foreign('product_id')->references('id')->on('products');
             
