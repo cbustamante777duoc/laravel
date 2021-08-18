@@ -4,11 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Product;
+use App\services\CartService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class ProductCartController extends Controller
 {
-   
+    public $cartService;
+
+    //inyecion de depencia
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -19,7 +28,8 @@ class ProductCartController extends Controller
      */
     public function store(Request $request, Product $product)
     {
-        $cart = Cart::create();
+        $cart = $this->cartService->getFromCookieOrCreate();
+
         //filtra por id / pivot = claves foreaneas / quantity cantidad primera ves cera 0
         $quantity = $cart->products()
             ->find($product->id)
@@ -28,11 +38,14 @@ class ProductCartController extends Controller
 
         //cada ves que el usario pincha sobre el enlace del producto se agrega un al carrito
         //metodo attach es como agregar pero necesita una cantidad
-        $cart->products()->attach([
-            $product->id => ['quantity' => $quantity +1],
+        $cart->products()->syncWithoutDetaching([
+            $product->id => ['quantity' => $quantity + 1],
         ]);
 
-        return redirect()->back();
+        $cookie = Cookie::make('cart', $cart->id, 7 * 24 * 60);
+        
+
+        return redirect()->back()->cookie($cookie);
     }
 
    
@@ -47,4 +60,6 @@ class ProductCartController extends Controller
     {
         //
     }
+
+  
 }
