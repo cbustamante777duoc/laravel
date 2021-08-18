@@ -18,8 +18,11 @@ Route::get('/', 'MainController@index')->name('main');
 //ruta que retorna un lista
 Route::get('products','ProductController@index')->name('products.index');
 
-
+//retorna todas las rutas del Controller de Producto
 Route::resource('products', 'ProductController');
+
+//va a retornar solo las ruta de store y destroy del controller de ProductCart
+Route::resource('products.carts', 'ProductCartController')->only(['store','destroy']);
 
 /*
 

@@ -45,6 +45,7 @@ class Product extends Model
         return $this->morphMany(Image::class,'imageable');
     }
 
+    //consulta que trae todos los los productos disponibles
     public function scopeAvailable($query)
     {
        $query->where('status','available');
