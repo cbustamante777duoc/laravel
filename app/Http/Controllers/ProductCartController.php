@@ -20,7 +20,7 @@ class ProductCartController extends Controller
     public function store(Request $request, Product $product)
     {
         $cart = Cart::create();
-        //filtra por id / pivot = claves foreaneas / quantity cantidad
+        //filtra por id / pivot = claves foreaneas / quantity cantidad primera ves cera 0
         $quantity = $cart->products()
             ->find($product->id)
             ->pivot
