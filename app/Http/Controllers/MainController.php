@@ -8,10 +8,11 @@ class MainController extends Controller
 {
     public function index()
     {
-        
+        //consulta que traiga todos los productos que tengan un status available
+        $products = Product::available()->get();
 
         return view('welcome')->with([
-            'products' => Product::all(),
+            'products' => $products,
         ]);
     }
 }
