@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>your cart</h1>
-    @if ($cart->products->isEmpty())
+    @if (!isset($cart) || $cart->products->isEmpty())
         <div class="alert alert-warning">
             your cart is empty
         </div>

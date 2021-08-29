@@ -23,7 +23,7 @@ class CartController extends Controller
     {
         //retorna una vista con la cookie cargada
         return view('carts.index')->with([
-            'cart' => $this->cartService->getFromCookieOrCreate(),
+            'cart' => $this->cartService->getFromCookie(),
         ]);
         
     }
