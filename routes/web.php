@@ -24,6 +24,8 @@ Route::resource('products', 'ProductController');
 //retorna  la rutas de index Controller de Cart
 Route::resource('carts', 'CartController')->only(['index']);
 
+Route::resource('orders', 'OrderController')->only(['create', 'store']);
+
 //va a retornar solo las ruta de store y destroy del controller de ProductCart
 Route::resource('products.carts', 'ProductCartController')->only(['store','destroy']);
 
