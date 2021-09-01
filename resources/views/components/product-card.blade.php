@@ -8,6 +8,7 @@
         
         <!--boton para eliminar-->
         @if(isset($cart))
+          <p class="card-text">{{$product->pivot->quantity}} in your cart <strong>({{ $product->total}})</strong></p>
           <form 
             class="d-inline" 
             method="POST" 

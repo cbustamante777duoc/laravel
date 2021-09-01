@@ -51,5 +51,11 @@ class Product extends Model
        $query->where('status','available');
     }
 
+    //metodo que multiplica la cantidad por el precio y retorna el total
+    public function getTotalAttribute()
+    {
+        return $this->pivot->quantity * $this->price;
+    }
+
     
 }
