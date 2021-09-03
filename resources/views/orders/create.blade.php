@@ -5,6 +5,22 @@
 
 <h4 class="text-center"> <strong>Gran Total: </strong> {{$cart->total}} </h4>
 
+<div class="text-center mb-3">
+	
+	<!--boton para agregar-->
+	<form 
+	class="d-inline" 
+	method="POST" 
+	action="{{ route('orders.store') }}"
+	>
+	
+	@csrf
+	<button type="submit" class="btn btn-success">Confirm Order</button>
+	
+	</form>
+
+</div>
+
 <div class="table-responsive">
 			<table class="table table-striped">
 				<thead class="thead-light">

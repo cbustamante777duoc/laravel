@@ -15,6 +15,9 @@ class OrderController extends Controller
     public function __construct(CartService $cartService)
     {
         $this->cartService = $cartService;
+        //protegiendo que el usuario este conectado
+        $this->middleware('auth');
+
     }
 
     /**
@@ -48,7 +51,29 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+
+        //crea un orden
+        $order = $user->orders()->create([
+            'status' => 'pending',
+        ]);
+
+        //envio todos los productos de la cookie
+        $cart = $this->cartService->getFromCookie();
+
+        $cartProductWithQuantity = $cart
+            ->products
+            //funcion que va a aguardar el el producto por id con la cantidad que esta en la tabla pivot
+            ->mapWithKeys(function($product){
+                $element[$product->id] = ['quantity' => $product->pivot->quantity];
+
+                return $element;
+            });
+
+            //dd($cartProductWithQuantity);
+            //mapWithKeys entrega un arreglo entonce se debe convertir a un arreglo 
+            $order->products()->attach($cartProductWithQuantity->toArray());
+
     }
 
     
