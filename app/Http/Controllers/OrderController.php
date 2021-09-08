@@ -74,6 +74,8 @@ class OrderController extends Controller
             //mapWithKeys entrega un arreglo entonce se debe convertir a un arreglo 
             $order->products()->attach($cartProductWithQuantity->toArray());
 
+            return redirect()->route('orders.payments.create',['order' => $order]);
+            
     }
 
     

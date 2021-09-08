@@ -29,6 +29,10 @@ Route::resource('orders', 'OrderController')->only(['create', 'store']);
 //va a retornar solo las ruta de store y destroy del controller de ProductCart
 Route::resource('products.carts', 'ProductCartController')->only(['store','destroy']);
 
+Route::resource('orders.payments', 'OrderPaymentController')->only(['create','store']);
+
+
+
 /*
 
 //ruta que retorna un un formulario
